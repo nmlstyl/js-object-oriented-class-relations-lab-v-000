@@ -16,19 +16,10 @@ class Driver {
     )
   }
 
-  passengers(){
-    let trips = this.trips()
-    let pids = []
-    for (const t of trips){
-      pids.push(t.passengerId)
-    }
-    return store.passengers.filter(p => {
-      let result = [];
-      for (const i of pids){
-        result.push(p.id === i)
-      }
-      return result;
-    })
+  passengers() {
+    return this.trips().map(trip => {
+      return trip.passenger();
+    });
   }
 
 }
@@ -46,19 +37,10 @@ class Passenger {
     )
   }
 
-  drivers(){
-    let trips = this.trips()
-    let dids = []
-    for (const t of trips){
-      dids.push(t.driverId)
-    }
-    return store.drivers.filter(p => {
-      let result = [];
-      for (const i of dids){
-        result.push(p.id === i)
-      }
-      return result;
-    })
+  drivers() {
+    return this.trips().map(trip => {
+      return trip.driver();
+    });
   }
 }
 
